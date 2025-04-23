@@ -136,6 +136,153 @@ Saldini 50, 20133 Milano, Italy}
 \label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\Pat{References to \cite{Lank/Venkatesh:2025a} will be precise once Venkatesh and I post the work}
+
+\begin{question}
+    What properties are invariant under Fourier--Mukai partnership? That is, given varieties $X$ and $Y$ that are derived equivalent, if $X$ satisfies a property $\mathcal{P}$ about schemes, then $\mathcal{Y}$ does as well. 
+\end{question}
+
+We can repackage things to think more about kernels (where much is still not understood).
+
+\begin{question}
+    Let $X$ and $Y$ be proper varieties over a field $k$ that are Fourier--Mukai partners (over $k$) given by $K\in D^b_{\operatorname{coh}}(X\times_k Y)$. Suppose $\mathcal{P}$ is a property about schemes. If $X$ satisfies $\mathcal{P}$, then what conditions must $K$ satisfy that ensure $Y$ satisfies $\mathcal{P}$ too? 
+\end{question}
+
+We say that $K$ \textbf{preserves} $\mathcal{P}$ if the above question is satisfied. We look at when $\mathcal{P}$ is a prescribed singularity type. To start, we need a lemma.
+
+\begin{lemma}\label{lem:rational_subcategory_those_that_split}
+    Let $X$ be a variety over a field of characteristic zero. Suppose $f\colon Y\to X$ and $f^\prime \colon Y^\prime \to X$ be modifications from smooth varieties. Then there is an equality:
+    \begin{displaymath}
+        \langle \mathbb{R} f_\ast D_{\operatorname{qc}} (Y) \rangle_1 = \langle \mathbb{R} f^\prime_\ast D_{\operatorname{qc}} (Y^\prime) \rangle_1,
+        %\begin{aligned}
+        %    \langle \mathbb{R} f_\ast D_{\operatorname{qc}} (Y) \rangle_1 
+        %    &= \langle \mathbb{R} f^\prime_\ast D_{\operatorname{qc}} (Y^\prime) \rangle_1,
+        %    \\& \langle \mathbb{R} f_\ast D_{\operatorname{coh}}^b (Y) \rangle_1 = \langle \mathbb{R} f^\prime_\ast D_{\operatorname{coh}}^b (Y^\prime) \rangle_1.
+        %\end{aligned}
+    \end{displaymath}
+\end{lemma}
+
+\begin{proof}
+    There is a fibered square
+    \begin{displaymath}
+        % https://q.uiver.app/#q=WzAsNCxbMSwwLCJZXFx0aW1lc19YIFleXFxwcmltZSJdLFswLDEsIlkiXSxbMiwxLCJZXlxccHJpbWUiXSxbMSwyLCJYIl0sWzAsMSwiZyJdLFswLDIsImdeXFxwcmltZSIsMl0sWzIsMywiZl5cXHByaW1lIiwyXSxbMSwzLCJmIl1d
+        \begin{tikzcd}
+            & {Y\times_X Y^\prime} \\
+            Y && {Y^\prime} \\
+            & X.
+            \arrow["g", from=1-2, to=2-1]
+            \arrow["{g^\prime}"', from=1-2, to=2-3]
+            \arrow["f", from=2-1, to=3-2]
+            \arrow["{f^\prime}"', from=2-3, to=3-2]
+        \end{tikzcd}
+    \end{displaymath}
+    From \cite[Theorem 2.12]{Bhatt:2012}, we know that $Y$ and $Y^\prime$ are derived splinters. This ensures that $\mathcal{O}_Y \xrightarrow{ntrl.} \mathbb{R}g_\ast \mathcal{O}_{Y\times_X Y^\prime}$ and $\mathcal{O}_{Y^\prime} \xrightarrow{ntrl.} \mathbb{R}g^\prime_\ast \mathcal{O}_{Y\times_X Y^\prime}$ split. Then tensoring with any $E\in D_{\operatorname{qc}}(Y)$ gives a section $E\to \mathbb{R}g_\ast \mathbb{L}g^\ast E$, and so, $\langle \mathbb{R}g_\ast D_{\operatorname{qc}} (Y\times_X Y^\prime) \rangle_1 = D_{\operatorname{qc}}(Y)$. A similar argument shows the same thing for $g^\prime \colon Y\times_X Y^\prime \to Y^\prime$. Then desired equality follows:
+    \begin{displaymath}
+        \begin{aligned}
+            \langle \mathbb{R}f_\ast D_{\operatorname{qc}}(Y) \rangle_1 
+            &= \langle \mathbb{R}(f\circ g)_\ast D_{\operatorname{qc}}(Y\times_X Y^\prime) \rangle_1 
+            \\&= \langle \mathbb{R}(f^\prime\circ g^\prime)_\ast D_{\operatorname{qc}}(Y\times_X Y^\prime) \rangle_1 
+            \\&= \langle \mathbb{R}f^\prime_\ast D_{\operatorname{qc}}(Y^\prime) \rangle_1.
+        \end{aligned}
+    \end{displaymath}
+    %% The general case can be done using \cite{Dey/Lank:2024}
+\end{proof}
+
+With notation above, write the subcategory as $\mathcal{T}_X$. By \cite[Lemma 5.17]{DeDeyn/Lank/ManaliRahul:2024b}, $\mathcal{T}_X$ consists of exactly those objects $E\in D_{\operatorname{qc}}(X)$ satisfying $E \xrightarrow{ntrl.}\mathbb{R}f_\ast \mathbb{L}f^\ast E$ splitting for some (equivalently all) modification $f\colon\widetilde{X} \to X$ from a smooth variety. The next result tells us something more geometric about this category.
+
+\begin{proposition}
+    \label{prop:derived_equivalent_mild_rational}
+    Let $X$ and $Y$ be proper varieties over a field $k$ of characteristic zero. Consider an object $K\in D_{\operatorname{qc}}(X\times_k Y)$ such that $\mathcal{O}_{Y_2}\in \langle \Phi_K (D_{\operatorname{qc}}(Y_1)) \rangle_1$ (e.g.\ $\Phi_K$ is an equivalence). Assume $Y_1$ has rational singularities. Then the following are equivalent:
+    \begin{enumerate}
+        \item \label{lem:derived_equivalent_mild_rational1} $Y_2$ has rational singularities
+        \item \label{lem:derived_equivalent_mild_rational2} $K\in \mathcal{T}_X$.
+    \end{enumerate}
+    In particular, if any of these conditions are satisfied, then $K$ preserves the property of having rational singularities.
+\end{proposition}
+
+\begin{proof}
+    That $\eqref{lem:derived_equivalent_mild_rational2} \implies \eqref{lem:derived_equivalent_mild_rational1}$ follows from \cite[?? \& ???]{Lank/Venkatesh:2025a}.
+    %From \cite[??]{Lank/Venkatesh:2025a}, one knows that $Y_1\times_k Y_2$ has rational singularities if \eqref{lem:derived_equivalent_mild_rational2} holds. Hence, \cite[??]{Lank/Venkatesh:2025a} implies $\mathcal{T}_{Y_1\times_k Y_2} = D_{\operatorname{qc}}(Y_1\times_k Y_2)$, and so $\eqref{lem:derived_equivalent_mild_rational1} \implies \eqref{lem:derived_equivalent_mild_rational2}$.
+    So we only need to check that $\eqref{lem:derived_equivalent_mild_rational2} \implies \eqref{lem:derived_equivalent_mild_rational1}$. 
+    %To start, we check that \eqref{lem:derived_equivalent_mild_rational2} is independent of the modification. 
+    %Consider a modification $f\colon \widetilde{Y} \to Y_1 \times_k Y_2$ from a smooth variety such that $K \xrightarrow{ntrl.} \mathbb{R}f_\ast \mathbb{L}f^\ast K$ splits. Suppose $f^\prime \colon Y \to Y_1\times_k Y_2$ were another modification from a smooth variety. We claim that $K \xrightarrow{ntrl.} \mathbb{R}f^\prime_\ast \mathbb{L}(f^\prime)^\ast K$ splits. There is a fibered square
+    %\begin{displaymath}
+        % https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXHdpZGV0aWxkZXtZfVxcdGltZXNfe1lfMVxcdGltZXNfayBZXzJ9IFkiXSxbMCwxLCJcXHdpZGV0aWxkZXtZfSJdLFsyLDEsIlkiXSxbMSwyLCJZXzFcXHRpbWVzX2sgWV8yIl0sWzAsMSwiZ15cXHByaW1lIl0sWzAsMiwiZyIsMl0sWzIsMywiZl5cXHByaW1lIiwyXSxbMSwzLCJmIl1d
+    %    \begin{tikzcd}
+    %        & {\widetilde{Y}\times_{Y_1\times_k Y_2} Y} \\
+    %        {\widetilde{Y}} && Y \\
+    %        & {Y_1\times_k Y_2.}
+    %        \arrow["{g^\prime}", from=1-2, to=2-1]
+    %        \arrow["g"', from=1-2, to=2-3]
+    %        \arrow["f", from=2-1, to=3-2]
+    %        \arrow["{f^\prime}"', from=2-3, to=3-2]
+    %    \end{tikzcd}
+    %\end{displaymath}
+    %By \cite[Theorem 2.12]{Bhatt:2012}, $\widetilde{Y}$ and $Y$ are derived splinters, so $\mathcal{O}_{\widetilde{Y}} \xrightarrow{ntrl.} \mathbb{R}g^\prime_\ast \mathcal{O}_{\widetilde{Y}\times_{Y_1\times_k Y_2} Y}$ and $\mathcal{O}_Y \xrightarrow{ntrl.} \mathbb{R}g_\ast \mathcal{O}_{\widetilde{Y}\times_{Y_1\times_k Y_2} Y}$ split. Now tensoring $\mathcal{O}_{\widetilde{Y}} \xrightarrow{ntrl.} \mathbb{R}g^\prime_\ast \mathcal{O}_{\widetilde{Y}\times_{Y_1\times_k Y_2} Y}$ with any $P\in D_{\operatorname{qc}}(\widetilde{X})$ tells us $P\in \langle \mathbb{R}g^\prime_\ast D_{\operatorname{qc}}(\widetilde{Y}\times_{Y_1\times_k Y_2} Y) \rangle_1$. From \cite[Lemma 5.5]{DeDeyn/Lank/ManaliRahul:2025}, there is an object $E\in \mathbb{R}g^\prime_\ast D_{\operatorname{qc}}(\widetilde{Y}\times_{Y_1\times_k Y_2} Y)$ such that $\mathbb{L}f^\ast K\in\langle E \rangle_1$. We can find an $E^\prime\in D_{\operatorname{qc}}(\widetilde{Y}\times_{Y_1\times_k Y_2} Y)$ such that $\mathbb{R}g^\prime_\ast E^\prime \cong E$. Then we have
+    %\begin{displaymath}
+    %    \begin{aligned}
+    %        K&\in \langle \mathbb{R}f_\ast \mathbb{L}f^\ast K \rangle_1
+    %        \\&\subseteq \langle \mathbb{R}(f\circ g^\prime)_\ast E \rangle_1
+    %        \\&\subseteq \langle \mathbb{R}(f^\prime \circ g)_\ast E \rangle_1.
+    %    \end{aligned}
+    %\end{displaymath}
+    %In other words, $K$ is in $\langle \mathbb{R}f^\prime_\ast D_{\operatorname{qc}}(Y) \rangle_1$, and so \cite[Lemma 5.17]{DeDeyn/Lank/ManaliRahul:2024b} tells us $K \xrightarrow{ntrl.} \mathbb{R}f^\prime_\ast \mathbb{L}(f^\prime)^\ast K$ splits as desired.
+    Assume $Y_1$ has rational singularities. Recall a variety over a field of characteristic zero admits a modification from a smooth variety by a sequence of blow ups (see e.g.\ \cite{Hironaka:1964a, Hironaka:1964b} or \cite[Theorem 2.3.6]{Temkin:2008}). Let $f_i \colon \widetilde{Y}_i \to Y_i$ be modifications from smooth varieties that are sequences of blow ups. 
+    %% Add char zero hypothesis
+    We have a commutative diagram
+    \begin{displaymath}
+        % https://q.uiver.app/#q=WzAsOSxbMiwxLCJZXzIiXSxbMSwyLCJZXzEiXSxbMSwxLCJZXzFcXHRpbWVzX2sgWV8yIl0sWzAsMiwiXFx3aWRldGlsZGV7WX1fMSJdLFswLDEsIlxcd2lkZXRpbGRle1l9XzFcXHRpbWVzX2sgWV8yIl0sWzEsMCwiWV8xXFx0aW1lc19rIFxcd2lkZXRpbGRle1l9XzIiXSxbMCwwLCJcXHdpZGV0aWxkZXtZfV8xXFx0aW1lc19rIFxcd2lkZXRpbGRle1l9XzIiXSxbMiwwLCJcXHdpZGV0aWxkZXtZfV8yIl0sWzIsMiwiXFxvcGVyYXRvcm5hbWV7U3BlY30oaykuIl0sWzIsMCwiXFxwaV8yIl0sWzIsMSwiXFxwaV8xIiwyXSxbMywxLCJmXzEiLDJdLFs0LDIsImZeXFxwcmltZV8xIiwyXSxbNSwyLCJmXlxccHJpbWVfMiJdLFs2LDUsImZee1xccHJpbWUgXFxwcmltZX1fMSIsMl0sWzYsNCwiZl57XFxwcmltZSBcXHByaW1lfV8yIl0sWzUsN10sWzcsMCwiZl8yIl0sWzQsM10sWzEsOF0sWzAsOF1d
+        \begin{tikzcd}
+            {\widetilde{Y}_1\times_k \widetilde{Y}_2} & {Y_1\times_k \widetilde{Y}_2} & {\widetilde{Y}_2} \\
+            {\widetilde{Y}_1\times_k Y_2} & {Y_1\times_k Y_2} & {Y_2} \\
+            {\widetilde{Y}_1} & {Y_1} & {\operatorname{Spec}(k)}
+            \arrow["{f^{\prime \prime}_1}"', from=1-1, to=1-2]
+            \arrow["{f^{\prime \prime}_2}", from=1-1, to=2-1]
+            \arrow["{h^\prime}", from=1-2, to=1-3]
+            \arrow["{f^\prime_2}", from=1-2, to=2-2]
+            \arrow["{f_2}", from=1-3, to=2-3]
+            \arrow["{f^\prime_1}"', from=2-1, to=2-2]
+            \arrow["h", from=2-1, to=3-1]
+            \arrow["{\pi_2}", from=2-2, to=2-3]
+            \arrow["{\pi_1}"', from=2-2, to=3-2]
+            \arrow[from=2-3, to=3-3]
+            \arrow["{f_1}"', from=3-1, to=3-2]
+            \arrow[from=3-2, to=3-3]
+        \end{tikzcd}
+    \end{displaymath}
+    whose squares are all fibered. Note that $\pi_1$, $\pi_1 \circ f^\prime_2$, $\pi_2$ and $\pi_2 \circ f^\prime_1$ are flat morphisms by base change. Then \cite[\href{https://stacks.math.columbia.edu/tag/0805}{Tag 0805}]{StacksProject} tells us that $f^\prime_1$, $f^{\prime \prime}_1$, $f^\prime_2$, and $f^{\prime \prime}_2$ are sequences of blow ups. So $f^\prime_2 \circ f^{\prime\prime}_1\colon \widetilde{Y}_1 \times_k \widetilde{Y}_2 \to Y_1\times_k Y_2$ is a modification from a smooth variety. From our hypothesis $K\in \mathcal{T}_X$ and \Cref{lem:rational_subcategory_those_that_split}, we see that
+    \begin{displaymath}
+        K\xrightarrow{ntrl.}\mathbb{R}(f^\prime_2 \circ f^{\prime\prime}_1)_\ast \mathbb{L}(f^\prime_2 \circ f^{\prime\prime}_1)^\ast K
+    \end{displaymath}
+    splits in $D_{\operatorname{qc}}(Y_1\times_k Y_2)$.
+
+    To show $Y_2$ has rational singularities, it suffices by \cite[Theorem A]{Lank/Venkatesh:2025b} to check that $\mathcal{O}_{Y_2}\in \langle \mathbb{R}(f_2)_\ast D^b_{\operatorname{coh}}(\widetilde{Y}_2) \rangle_1$. Consider the integral transform $\Phi_{\mathbb{L} (f^\prime_2\circ f^{\prime \prime}_1)^\ast K} \colon D_{\operatorname{qc}}(\widetilde{Y}_1) \to D_{\operatorname{qc}}(Y_2)$. From $Y_1$ having rational singularities, \cite[??]{Lank/Venkatesh:2025b} tells us $E \xrightarrow{ntrl.} \mathbb{R}(f_1)_\ast \mathbbb{L} f_1^\ast E$ is an isomorphism. We have the following computation using projection formula:
+    \begin{displaymath}
+        \begin{aligned}
+            \mathbb{R}(f_2)_\ast & \Phi_{\mathbb{L} (f^\prime_2\circ f^{\prime \prime}_1)^\ast K} (\mathbb{L}f_1^\ast E)
+            \\&= \mathbb{R}(f_2\circ h^\prime \circ f^{\prime \prime}_1)_\ast (\mathbb{L} (f_1 \circ h \circ f^{\prime \prime}_2)^\ast E \otimes^{\mathbb{L}} \mathbb{L} (f^\prime_2\circ f^{\prime \prime}_1)^\ast K)
+            \\&\cong \mathbb{R}(\pi_2 \circ f^\prime_2 \circ f^{\prime \prime}_1 )_\ast (\mathbb{L} (\pi_1 \circ f^\prime_2 \circ f^{\prime \prime}_1 )^\ast E \otimes^{\mathbb{L}} \mathbb{L}(f^\prime_2\circ f^{\prime \prime}_1)^\ast K)
+            \\&\cong \mathbb{R}(\pi_2)_\ast ( \mathbb{R}(f^\prime_2 \circ f^{\prime \prime}_1 )_\ast \mathbb{L}(f^\prime_2\circ f^{\prime \prime}_1)^\ast K \otimes^{\mathbb{L}} \mathbb{L} \pi_1^\ast E)
+        \end{aligned}
+    \end{displaymath}
+    Our hypothesis tells us $K\xrightarrow{ntrl.}\mathbb{R}(f^\prime_2 \circ f^{\prime\prime}_1)_\ast \mathbb{L}(f^\prime_2 \circ f^{\prime\prime}_1)^\ast K$ splits. Hence, after tensoring by $\mathbb{L}\pi_1^\ast E$, one has that $\mathbb{L}\pi_1^\ast E \otimes^{\mathbb{L}} K$ is a direct summand of 
+    \begin{displaymath}
+        \mathbb{R}(f^\prime_2 \circ f^{\prime \prime}_1 )_\ast \mathbb{L}(f^\prime_2\circ f^{\prime \prime}_1)^\ast K \otimes^{\mathbb{L}} \mathbb{L} \pi_1^\ast E.
+    \end{displaymath}
+    It follows that
+    \begin{displaymath}
+        \mathcal{O}_{Y_2} \in \langle \Phi_K (E) \rangle_1 \subseteq \langle \mathbb{R}(f_2)_\ast \Phi_{\mathbb{L} (f^\prime_2\circ f^{\prime \prime}_1)^\ast K} (\mathbb{L}f_1^\ast E) \rangle_1.
+    \end{displaymath}
+    By \cite[Lemma 5.17]{DeDeyn/Lank/ManaliRahul:2024b}, we see that $\mathcal{O}_{Y_2} \xrightarrow{ntrl.} \mathbb{R}(f_2)_\ast \mathcal{O}_{\widetilde{Y}_2}$ splits, which completes the proof as $\mathbb{L}f_2^\ast \mathcal{O}_{Y_2}= \mathcal{O}_{\widetilde{Y}_2} \in D^b_{\operatorname{coh}}(\widetilde{Y}_2)$.
+\end{proof}
+
+\begin{corollary}
+    Let $Y_1$ and $Y_2$ be proper varieties over a field $k$ of characteristic zero that are Fourier--Mukai partners given by a kernel $K\in \mathcal{T}_{Y_1\times_k Y_2}$. Then $X$ has rational singularities if, and only if, $Y$ has such.
+\end{corollary}
+
+It follows from \cite[??]{Lank/Venkatesh:2025a} that $Y_1\times_k Y_2$ has rational singularities if the property `having rational singularities' is a derived invariant. So the constraint on the kernel is quite natural; in fact, is a necessary condition.
+
+
 \bibliographystyle{alpha}
 \bibliography{mainbib}
 
