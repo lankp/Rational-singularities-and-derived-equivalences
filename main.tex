@@ -1,0 +1,142 @@
+%\pdfoutput=1 %so that arXiv doesn't fudge it
+\documentclass[11pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm,enumerate,enumitem,colonequals,mlmodern,tikz-cd,microtype, quiver}
+%amssymb, amsmath, enumerate, amsthm, cite, colonequals, stmaryrd, graphicx, fancyvrb, fancyhdr, indentfirst, setspace, enumitem
+% \usepackage[mathcal]{eucal}
+\usepackage[cal=euler,bfcal,bb=px,bfbb]{mathalpha}
+% \usepackage[margin=1in]{geometry}
+\usepackage[top=3.75cm, bottom=3cm, left=3.5cm, right=3.5cm]{geometry}
+
+\makeatletter
+\@namedef{subjclassname@2020}{\textup{2020} Mathematics Subject Classification}
+\makeatother
+
+\usepackage{xcolor}
+\colorlet{darkblue}{blue!55!black}
+\colorlet{darkcyan}{cyan!50!black}
+\colorlet{darkgreen}{green!60!black}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor= darkblue,
+    urlcolor= darkcyan,
+    citecolor= darkgreen,
+}
+
+\def\eqref#1{\textcolor{darkblue}{(\ref{#1})}}
+
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+% \hypersetup{bookmarksdepth=2}
+
+\usepackage[nameinlink]{cleveref} %the nameinlink option can be left out; see what suits
+\Crefformat{section}{#2\S#1#3} % to get \S instead of \Section
+\Crefmultiformat{section}{#2\S\S#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefname{hypothesis}{hypothesis}{hypotheses}
+\Crefname{hypothesis}{Hypothesis}{Hypotheses}
+
+\newcommand{\Pat}[1]{{\color{magenta} $\clubsuit$ Pat: [#1]}}
+
+%%% Overfill notice --------------------------------------------------
+
+\usepackage[pagewise]{lineno}
+\overfullrule = 100pt
+\let\oldequation\equation
+\let\oldendequation\endequation
+\renewenvironment{equation}{\linenomathNonumbers\oldequation}{\oldendequation\endlinenomath}
+\expandafter\let\expandafter\oldequationstar\csname equation*\endcsname
+\expandafter\let\expandafter\oldendequationstar\csname endequation*\endcsname
+\renewenvironment{equation*}{\linenomathNonumbers\oldequationstar}{\oldendequationstar\endlinenomath}
+\let\oldalign\align
+\let\oldendalign\endalign
+\renewenvironment{align}{\linenomathNonumbers\oldalign}{\oldendalign\endlinenomath}
+\expandafter\let\expandafter\oldalignstar\csname align*\endcsname
+\expandafter\let\expandafter\oldendalignstar\csname endalign*\endcsname
+\renewenvironment{align*}{\linenomathNonumbers\oldalignstar}{\oldendalignstar\endlinenomath}
+
+%%% THEOREM STYLES --------------------------------------------------
+\makeatletter
+\makeatother
+
+\newcounter{intro}
+\newcounter{HypCounter}
+\renewcommand{\theHypCounter}{{(}\alph{HypCounter}{)}}
+
+\newtheorem{introthm}[intro]{Theorem}
+\renewcommand{\theintro}{\Alph{intro}}
+\newtheorem{introcor}[intro]{Corollary}
+\renewcommand{\theintro}{\Alph{intro}}
+\newtheorem{introconjecture}[intro]{Conjecture}
+\renewcommand{\theintro}{\Alph{intro}}
+\newtheorem{introquestion}[intro]{Question}
+\renewcommand{\theintro}{\Alph{intro}}
+\newtheorem{introprop}[intro]{Proposition}
+\renewcommand{\theintro}{\Alph{intro}}
+\newtheorem{introdef}[intro]{Definition}
+\renewcommand{\theintro}{\Alph{intro}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{nonexample}[theorem]{Non-Example}
+\newtheorem{hypothesis}[HypCounter]{Hypothesis}
+\newtheorem*{hypothesis*}{Hypothesis}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{setup}[theorem]{Setup}
+
+\newtheorem*{disclaimer}{Disclaimer}
+\newtheorem*{ack}{Acknowledgements}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+
+%%% DOCUMENT INFORMATION --------------------------------------------------
+\title[fill later]{fill later}
+
+\author[P.~Lank]{Pat Lank}
+\address{P.~Lank,
+Dipartimento di Matematica “F. Enriques”, Universit\`{a} degli Studi di Milano, Via Cesare
+Saldini 50, 20133 Milano, Italy}
+\email{plankmathematics@gmail.com}
+
+\date{\today}
+
+\keywords{fill later}
+
+\subjclass[2020]{fill later (primary)}
+
+\begin{document}
+    
+\begin{abstract}
+    fill later
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{alpha}
+\bibliography{mainbib}
+
+\end{document}
